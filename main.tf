@@ -62,6 +62,8 @@ resource "aws_subnet" "roboshop_database_subnets" {
   )
 }
 
+# AWS db subnet group?
+
 resource "aws_eip" "nat_gateway_eip" {
   domain = "vpc"
 }
@@ -139,7 +141,8 @@ resource "aws_route_table_association" "pubic" {
 
 resource "aws_route_table_association" "private" {
   count = length(var.private_subnet_cidrs)
-  subnet_id      = aws_subnet.roboshop_private_subnets[count.index].id
+  # subnet_id      = aws_subnet.roboshop_private_subnets[count.index].id  (or)
+  subnet_id      = element(aws_subnet.roboshop_private_subnets[*].id, count.index)
   route_table_id = aws_route_table.private.id
 }
 
