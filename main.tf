@@ -28,7 +28,7 @@ resource "aws_subnet" "roboshop_public_subnets" {
   vpc_id = aws_vpc.roboshop-vpc.id
   cidr_block = var.public_subnet_cidrs[count.index]
   availability_zone = local.azones[count.index]
-  map_public_ip_on_launch = true
+  # map_public_ip_on_launch = true
   tags = merge(
     var.common_tags,
     {
