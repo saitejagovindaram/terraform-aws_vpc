@@ -11,7 +11,7 @@ resource "aws_vpc" "roboshop-vpc" {
     )
 }
 
-resource "aws_internet_gateway" "roboshop-igw" {
+resource "aws_internet_gateway" "roboshop-igw" { # You can attach only one internet gateway to a VPC at a time
   vpc_id = aws_vpc.roboshop-vpc.id
 
   tags = merge(
